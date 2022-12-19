@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Install Homebrew
+install_homebrew() {
+  curl -fs -o /tmp/install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  bash /tmp/install.sh
+}
+
+# Install bash and set it as default shell
+setup_bash() {
+  brew install bash bash-completion
+  chsh -s /bin/bash
+}
+
+# Install xcode-select
+install_xcode_select() {
+  whereis xcode-select || xcode-select --install
+}
+
+# Install useful tools
+install_tools() {
+  brew install git awscli openssl postgresql@11
+  brew install --cask docker dbeaver-community
+  brew install docker-completion
+}
+
+install_pyenv() {
+  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+  echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
+  source ~/.bash_profile
+  git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+  echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.
+  source ~/.bash_profile
+}
+
+install_homebrew
+setup_bash
+install_xcode_select
+install_tools
+
+if [ ! -d ~/.pyenv ]; then
+  install_pyenv
+fi
