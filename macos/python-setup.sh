@@ -35,10 +35,23 @@ install_pyenv() {
   source ~/.bash_profile
 }
 
+git_config() {
+  git config --global alias.co checkout
+  git config --global alias.ba "branch -a"
+  git config --global alias.bd "branch -D"
+  git config --global alias.ca "commit -a -m"
+  git config --global core.autocrlf false
+  git config --global alias.st "status --short --branch"
+  git config --global alias.merc "merge --no-ff"
+  git config --global alias.grog "log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)'"
+  git config --global push.default simple
+}
+
 install_homebrew
 setup_bash
 install_xcode_select
 install_tools
+git_config
 
 if [ ! -d ~/.pyenv ]; then
   install_pyenv
