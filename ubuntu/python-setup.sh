@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt update
+
 # Add git repo
 sudo add-apt-repository ppa:git-core/ppa
 
