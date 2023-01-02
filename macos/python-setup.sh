@@ -4,6 +4,7 @@
 install_homebrew() {
   curl -fs -o /tmp/install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
   bash /tmp/install.sh
+  export PATH=$PATH:/opt/homebrew/bin
 }
 
 # Install bash and set it as default shell
